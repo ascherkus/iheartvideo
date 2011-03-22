@@ -23,6 +23,9 @@ body {
   vertical-align: top;
 }
 #status td {
+  width: 15em;
+}
+#status td {
   border: solid black 1px;
 }
 #status td.on {
