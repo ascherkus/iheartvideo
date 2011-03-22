@@ -4,5 +4,11 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /scripts
+  static_dir: scripts
+
 - url: /.*
   script: main.py
