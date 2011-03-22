@@ -13,15 +13,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
-
 class MainHandler(webapp.RequestHandler):
-
   def get(self):
     f = open('index.html', 'r')
     self.response.out.write(f.read())
@@ -32,7 +28,6 @@ def main():
   application = webapp.WSGIApplication([('/', MainHandler)],
                                        debug=True)
   util.run_wsgi_app(application)
-
 
 if __name__ == '__main__':
   main()
