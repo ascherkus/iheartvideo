@@ -1,0 +1,38 @@
+body {
+  font-family: monospace;
+}
+
+#title {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.heart {
+  color: #e00;
+}
+
+#author {
+  font-size: 0.9em;
+  color: #999;
+}
+
+#status {
+  border: solid black 1px;
+}
+#status th {
+  vertical-align: top;
+}
+#status td {
+  border: solid black 1px;
+}
+#status td.on {
+  background-color: #090;
+  color: #fff;
+  font-weight: bold;
+}
+#status td.off {
+  color: #999;
+}
+#log_text {
+  width: 100%;
+}

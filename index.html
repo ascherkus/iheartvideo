@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>I HEART VIDEO</title>
+    <link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js" type="text/javascript"></script>
+    <script src="scripts/main.js" type="text/javascript"></script>
+  </head>
+  <body onload="main()">
+    <div>
+      <span id="title">I <span class="heart">HEART</span> VIDEO</span>
+      <span id="author">by scherkus@chromium.org</span>
+    </div>
+
+    <table>
+      <tr>
+        <td><label for="url_input">URL:</label></td>
+        <td>
+          <input id="url_input" type="text" size="64" />
+          <button onclick="loadMedia($('url_input').value)">Load</button>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td class="desc">Enter an audio/video URL to debug.</td>
+      </tr>
+    </table>
+
+    <p>
+      <video id="v" controls></video>
+    </p>
+
+    <table id="status">
+      <tr>
+        <th>readyState</th>
+        <td id="rs_0">HAVE_NOTHING</td>
+        <td id="rs_1">HAVE_METADATA</td>
+        <td id="rs_2">HAVE_CURRENT_DATA</td>
+        <td id="rs_3">HAVE_FUTURE_DATA</td>
+        <td id="rs_4">HAVE_ENOUGH_DATA</td>
+      </tr>
+      <tr>
+        <th>networkState</th>
+        <td id="ns_0">NETWORK_EMPTY</td>
+        <td id="ns_1">NETWORK_IDLE</td>
+        <td id="ns_2">NETWORK_LOADING</td>
+        <td id="ns_3">NETWORK_LOADED</td>
+        <td id="ns_4">NETWORK_NO_SOURCE</td>
+      </tr>
+      <tr>
+        <th>error</th>
+        <td id="e_0">null</td>
+        <td id="e_1">MEDIA_ERR_ABORTED</td>
+        <td id="e_2">MEDIA_ERR_NETWORK</td>
+        <td id="e_3">MEDIA_ERR_DECODE</td>
+        <td id="e_4">MEDIA_ERR_SRC_NOT_SUPPORTED</td>
+      </tr>
+      <tr>
+        <th>
+          events<br />
+          <button onclick="clearLog()">Clear</button>
+        </th>
+        <td colspan="5">
+          <textarea id="log_text" rows="12"></textarea>
+        </td>
+      </tr>
+    </table>
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-15960619-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+  </body>
+</html>
