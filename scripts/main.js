@@ -74,20 +74,20 @@ function CellUpdater(prefix, count, expr) {
 
   this.update = function() {
     for (var i = 0; i < this.count; ++i) {
-      on = this.expr(i)
+      on = this.expr(i);
       $(this.prefix + i).toggleClass('on', on).toggleClass('off', !on);
     }
   };
 }
 
 function CountUpdater(prefix, v) {
-  this.prefix = prefix
-  this.video = v
+  this.prefix = prefix;
+  this.video = v;
   this.counts = [
     'webkitDecodedFrameCount',
     'webkitDroppedFrameCount',
     'webkitVideoDecodedByteCount',
-    'webkitAudioDecodedByteCount',
+    'webkitAudioDecodedByteCount'
   ];
 
   this.update = function() {
