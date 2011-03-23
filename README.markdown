@@ -1,7 +1,6 @@
 iheartvideo
 ===========
 
-Super simple AppEngine application for HTML5 audio/video debugging.
+Super simple HTML5 audio/video debugging app hosted off of github.
 
-Feel free to contribute and ping me if you want access to the AppEngine
-instance at http://iheartvideo.appspot.com
+Feel free to contribute!
