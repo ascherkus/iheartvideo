@@ -104,7 +104,7 @@ function VideoWatcher(video) {
     return video.attr('readyState') == value;
   });
 
-  this.networkStateUpdater = new CellUpdater('#ns_', 5, function(value) {
+  this.networkStateUpdater = new CellUpdater('#ns_', 4, function(value) {
     return video.attr('networkState') == value;
   });
 
