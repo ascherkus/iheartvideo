@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>I HEART VIDEO - The Benchmarker</title>
+    <link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
+    <script src="scripts/benchmark.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div>
+      <span id="title">I <span class="heart">HEART</span> VIDEO</span>
+      <span id="subtitle">by <a href="http://www.github.com/ascherkus/">ascherkus</a>
+          (code on <a href="http://www.github.com/ascherkus/iheartvideo">github</a>)</span>
+    </div>
+
+    <table>
+      <tr>
+        <td><label for="url_input">URL:</label></td>
+        <td>
+          <input id="url_input" type="text" size="64" />
+          <button id="url_button" onclick="loadMovie(document.getElementById('url_input').value)">Load</button>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td class="desc">Enter an audio/video URL to benchmark.</td>
+      </tr>
+    </table>
+
+    <!-- Used for benchmarking. -->
+    <video autoplay id="v" style="display:none"></video>
+
+    <p>
+
+    <div style="font-family:monospace; font-weight: bold">The Logbox</div>
+    <div id="l" style="white-space: pre; width: 400px; font-family:monospace; border: solid 1px gray"></div>
+
+    <script>
+      var v = document.getElementById('v');
+      var l = document.getElementById('l');
+
+      function log(text) {
+        l.innerText = l.innerText + text + '\n';
+        console.log(text);
+      }
+
+      function loadMovie(src) {
+        var perf = new Benchmark(v, src);
+
+        perf.testCached(function(avg) {
+          log('Cached: ' + avg);
+
+          perf.testUncached(function(avg) {
+            log('Uncached: ' + avg);
+
+            perf.testShortSeek(function(avg) {
+              log('Short seek: ' + avg);
+
+              perf.testLongSeek(function(avg) {
+                log('Long seek: ' + avg);
+                log('');
+              });
+            });
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
