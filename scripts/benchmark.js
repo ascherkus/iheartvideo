@@ -56,7 +56,7 @@ Benchmark.prototype = {
     this.video_.load();
   },
 
-  testCached: function(done_cb) {
+  testCached: function(iterations, done_cb) {
     console.log('Starting cached tests...');
 
     var times = -1;
@@ -69,7 +69,7 @@ Benchmark.prototype = {
         timer.stop();
       }
 
-      if (times == 5) {
+      if (times == iterations) {
         this.reset();
         done_cb(timer.average());
         return;
@@ -88,7 +88,7 @@ Benchmark.prototype = {
     this.video_.load();
   },
 
-  testUncached: function(done_cb) {
+  testUncached: function(iterations, done_cb) {
     console.log('Starting uncached tests...');
     this.reset();
 
@@ -98,7 +98,7 @@ Benchmark.prototype = {
       timer.stop();
       times++;
 
-      if (times == 5) {
+      if (times == iterations) {
         this.reset();
         done_cb(timer.average());
         return;
@@ -114,7 +114,7 @@ Benchmark.prototype = {
     this.video_.load();
   },
 
-  testShortSeek: function(done_cb) {
+  testShortSeek: function(iterations, done_cb) {
     console.log('Starting short seek tests...');
     this.reset();
 
@@ -131,7 +131,7 @@ Benchmark.prototype = {
       timer.stop();
       times++;
 
-      if (times == 5) {
+      if (times == iterations) {
         this.reset();
         done_cb(timer.average());
         return;
@@ -147,7 +147,7 @@ Benchmark.prototype = {
     this.video_.load();
   },
 
-  testLongSeek: function(done_cb) {
+  testLongSeek: function(iterations, done_cb) {
     console.log('Starting long seek tests...');
     this.reset();
 
@@ -164,7 +164,7 @@ Benchmark.prototype = {
       timer.stop();
       times++;
 
-      if (times == 5) {
+      if (times == iterations) {
         this.reset();
         done_cb(timer.average());
         return;

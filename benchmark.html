@@ -17,7 +17,14 @@
         <td><label for="url_input">URL:</label></td>
         <td>
           <input id="url_input" type="text" size="64" />
-          <button id="url_button" onclick="loadMovie(document.getElementById('url_input').value)">Load</button>
+          <select id="test_select">
+            <option selected value="all">All tests (x5)</option>
+            <option value="cached">Cached</option>
+            <option value="uncached">Uncached</option>
+            <option value="short">Short seek</option>
+            <option value="long">Long seek</option>
+          </select>
+          <button id="url_button" onclick="runTests()">Run</button>
         </td>
       </tr>
       <tr>
@@ -38,30 +45,68 @@
       var v = document.getElementById('v');
       var l = document.getElementById('l');
 
+      var tests = {
+        'all': function(src) {
+          var perf = new Benchmark(v, src);
+
+          perf.testCached(5, function(avg) {
+            log('Cached: ' + avg);
+
+            perf.testUncached(5, function(avg) {
+              log('Uncached: ' + avg);
+
+              perf.testShortSeek(5, function(avg) {
+                log('Short seek: ' + avg);
+
+                perf.testLongSeek(5, function(avg) {
+                  log('Long seek: ' + avg);
+                  log('');
+                });
+              });
+            });
+          });
+        },
+
+        'cached': function(src) {
+          var perf = new Benchmark(v, src);
+          perf.testCached(1, function(avg) {
+            log('Cached: ' + avg);
+          });
+        },
+
+        'uncached': function(src) {
+          var perf = new Benchmark(v, src);
+          perf.testUncached(1, function(avg) {
+            log('Uncached: ' + avg);
+          });
+        },
+
+        'short': function(src) {
+          var perf = new Benchmark(v, src);
+          perf.testShortSeek(1, function(avg) {
+            log('Short seek: ' + avg);
+          });
+        },
+
+        'long': function(src) {
+          var perf = new Benchmark(v, src);
+          perf.testLongSeek(1, function(avg) {
+            log('Long seek: ' + avg);
+          });
+        }
+      };
+
       function log(text) {
         l.innerText = l.innerText + text + '\n';
         console.log(text);
       }
 
-      function loadMovie(src) {
-        var perf = new Benchmark(v, src);
+      function runTests() {
+        var src = document.getElementById('url_input').value;
+        var test = document.getElementById('test_select').value;
 
-        perf.testCached(function(avg) {
-          log('Cached: ' + avg);
-
-          perf.testUncached(function(avg) {
-            log('Uncached: ' + avg);
-
-            perf.testShortSeek(function(avg) {
-              log('Short seek: ' + avg);
-
-              perf.testLongSeek(function(avg) {
-                log('Long seek: ' + avg);
-                log('');
-              });
-            });
-          });
-        });
+        // Run the selected test.
+        tests[test](src);
       }
     </script>
   </body>
