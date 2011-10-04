@@ -51,11 +51,30 @@ function main() {
   var v = $('#v').first();
   var watcher = new VideoWatcher(v);
 
+  function onEvent(e) {
+    var str = pad(e.type, 14) + ' (currentTime=' + $(this).attr('currentTime');
+
+    switch (e.type) {
+      case 'durationchange':
+        str += ', duration=' + $(this).attr('duration');
+        break;
+
+      case 'progress':
+      case 'suspend':
+        str += ', buffered=' + $(this).attr('buffered').end(0);
+        break;
+
+      default:
+        break;
+    }
+
+    str += ')';
+    log(str);
+    watcher.update();
+  }
+
   for (var i = 0; i < events.length; ++i) {
-    v.bind(events[i], function(e) {
-      log(pad(e.type, 14) + ' (currentTime=' + $(this).attr('currentTime') + ')');
-      watcher.update();
-    });
+    v.bind(events[i], onEvent);
   }
 
   $('#url_button').click(function() {
