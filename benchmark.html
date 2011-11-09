@@ -108,6 +108,27 @@
         // Run the selected test.
         tests[test](src);
       }
+
+      function getQueryParams(url) {
+        var query = url.split('?');
+        var result = {};
+        if (query.length <= 1) {
+          return result;
+        }
+        query = query[1].split('&');
+        for (var i = 0; i < query.length; ++i) {
+          var keyvalue = query[i].split('=');
+          result[keyvalue[0]] = decodeURIComponent(keyvalue[1]);
+        }
+        return result;
+      }
+
+      var params = getQueryParams(window.location.href);
+      if (params.url && params.test) {
+        document.getElementById('url_input').value = params.url;
+        document.getElementById('test_select').value = params.test;
+        runTests();
+      }
     </script>
   </body>
 </html>

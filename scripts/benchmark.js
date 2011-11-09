@@ -44,6 +44,7 @@ function Benchmark(video, src) {
   this.video_.addEventListener('playing', function() { me.playing(); });
   this.video_.addEventListener('seeked', function() { me.seeked(); });
   this.video_.addEventListener('suspend', function() { me.suspend(); });
+  this.video_.addEventListener('error', function() { me.error(); });
 };
 
 Benchmark.prototype = {
@@ -51,6 +52,7 @@ Benchmark.prototype = {
     this.playing = function() {};
     this.seeked = function() {};
     this.suspend = function() {};
+    this.error = function() {};
 
     this.video_.src = '';
     this.video_.load();
@@ -58,6 +60,8 @@ Benchmark.prototype = {
 
   testCached: function(iterations, done_cb) {
     console.log('Starting cached tests...');
+    this.reset();
+    this.error = function() { done_cb("Error loading media"); }
 
     var times = -1;
     var timer = new Timer;
@@ -91,6 +95,7 @@ Benchmark.prototype = {
   testUncached: function(iterations, done_cb) {
     console.log('Starting uncached tests...');
     this.reset();
+    this.error = function() { done_cb("Error loading media"); }
 
     var times = 0;
     var timer = new Timer;
@@ -117,6 +122,7 @@ Benchmark.prototype = {
   testShortSeek: function(iterations, done_cb) {
     console.log('Starting short seek tests...');
     this.reset();
+    this.error = function() { done_cb("Error loading media"); }
 
     var times = 0;
     var timer = new Timer;
@@ -150,6 +156,7 @@ Benchmark.prototype = {
   testLongSeek: function(iterations, done_cb) {
     console.log('Starting long seek tests...');
     this.reset();
+    this.error = function() { done_cb("Error loading media"); }
 
     var times = 0;
     var timer = new Timer;
